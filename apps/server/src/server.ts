@@ -1,7 +1,20 @@
-import { initTRPC } from "@trpc/server";
+import { applyWSSHandler } from "@trpc/server/adapters/ws";
+import { createContext } from "vm";
+import appRouter, { AppRouter } from "./appRouter";
+import { listen } from "./servers/httpServer";
+import wss from "./servers/wsServer";
 
-const server = initTRPC.create();
+applyWSSHandler<AppRouter>({
+  wss,
+  router: appRouter,
+  createContext: createContext,
+});
 
-export const { router, procedure } = server;
+const port = Number(process.env.PORT) || 5000;
 
-export default server;
+const startServer = () => {
+  listen(port);
+  console.log(`Server started on: http://localhost:${port}`);
+};
+
+export default startServer;

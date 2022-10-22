@@ -1,5 +1,5 @@
 import prisma from "../prisma";
-import { procedure } from "../server";
+import { procedure } from "../servers/trpcServer";
 
 interface Hello {
   hello: "world";

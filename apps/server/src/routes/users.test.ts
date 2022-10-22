@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { createRouter } from "../router";
+import { createRouter } from "../appRouter";
 
 async function createContextInner() {
   return {};

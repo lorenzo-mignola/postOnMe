@@ -1,7 +1,15 @@
-import { createPrisma } from "./prisma";
-import { createRouter } from "./router";
+import prisma, { createPrisma } from "./prisma";
+import startServer from "./server";
 
 const start = async () => {
-  createRouter();
-  createPrisma();
+  try {
+    createPrisma();
+    startServer();
+  } catch (error) {
+    console.error(error);
+    await prisma.$disconnect();
+    process.exit(1);
+  }
 };
+
+start();
