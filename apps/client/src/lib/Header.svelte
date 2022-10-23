@@ -1,0 +1,16 @@
+<script>
+  import { link } from 'svelte-spa-router';
+  import User from '../assets/User.svelte';
+</script>
+
+<nav class="flex p-4 bg-gray-700 justify-between text-gray-50">
+  <h1 class="text-3xl font-bold">
+    <a href="/" use:link>
+      Post<span class="text-cyan-400">On</span>Me
+    </a>
+  </h1>
+  <div class="flex items-center gap-1">
+    <User />
+    <a href="/login" use:link>Login</a>
+  </div>
+</nav>

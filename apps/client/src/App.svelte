@@ -1,8 +1,15 @@
-<script>
+<script lang="ts">
+  import Router from 'svelte-spa-router';
+  import Header from './lib/Header.svelte';
+  import routes from './routes';
 </script>
 
 <main>
-  <h1 class="text-3xl font-bold underline">Hello world!</h1>
+  <Header />
+
+  <div>
+    <Router {routes} />
+  </div>
 </main>
 
 <style>
