@@ -12,7 +12,9 @@
     "lint": {
       "outputs": []
     },
-    "test": {},
+    "test": {
+      "cache": true
+    },
     "dev": {
       "cache": false
     }
