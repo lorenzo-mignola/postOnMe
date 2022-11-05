@@ -19,8 +19,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await prismaClient.$queryRaw`DROP TABLE post`;
-  await prismaClient.$queryRaw`DROP TABLE user`;
+  await prismaClient.post.deleteMany();
+  await prismaClient.user.deleteMany();
 });
 
 test("should get a list with 1 post", async () => {
