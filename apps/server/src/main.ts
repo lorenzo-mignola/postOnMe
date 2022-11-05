@@ -1,4 +1,4 @@
-import prisma, { createPrisma } from "./prisma";
+import prismaClient, { createPrisma } from "./prismaClient";
 import startServer from "./server";
 
 const start = async () => {
@@ -7,7 +7,7 @@ const start = async () => {
     startServer();
   } catch (error) {
     console.error(error);
-    await prisma.$disconnect();
+    await prismaClient.$disconnect();
     process.exit(1);
   }
 };
