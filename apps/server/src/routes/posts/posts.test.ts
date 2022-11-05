@@ -30,4 +30,5 @@ test("should get a list with 1 post", async () => {
   const posts = await caller.posts();
 
   expect(posts).toHaveLength(1);
+  expect(posts[0].author.name).toBe(user.name);
 });
