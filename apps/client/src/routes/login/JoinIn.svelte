@@ -16,6 +16,6 @@
     class=" inline-block rounded border border-cyan-600 bg-cyan-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-cyan-600 focus:outline-none focus:ring active:text-cyan-500 flex-1"
     href="/home"
   >
-    Login
+    Join In
   </a>
 </div>

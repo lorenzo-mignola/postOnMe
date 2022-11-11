@@ -1,9 +1,9 @@
 import Home from './routes/home/Home.svelte';
-import Login from './routes/login/Login.svelte';
+import JoinIn from './routes/login/JoinIn.svelte';
 
 const routes = {
   '/': Home,
-  '/login': Login
+  '/join': JoinIn
 };
 
 export default routes;

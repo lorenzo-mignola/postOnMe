@@ -26,6 +26,6 @@ describe('Post.svelte', () => {
 
     expect(author.innerHTML).toBe(`@${post.author.name}`);
     expect(text.innerHTML).toBe(post.text);
-    expect(date.innerHTML).toBe(post.createdAt.toLocaleString());
+    expect(date.innerHTML).toBe('04.11.2022 11:37');
   });
 });

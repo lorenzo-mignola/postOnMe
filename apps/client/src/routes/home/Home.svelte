@@ -6,7 +6,11 @@
   let posts: PostType[] = [];
 
   onMount(async () => {
-    posts = await client.posts.query();
+    try {
+      posts = await client.posts.query();
+    } catch (e) {
+      console.error(e);
+    }
   });
 </script>
 

@@ -11,6 +11,6 @@
   </h1>
   <div class="flex items-center gap-1">
     <User />
-    <a href="/login" use:link>Login</a>
+    <a href="/join" use:link>Join In</a>
   </div>
 </nav>

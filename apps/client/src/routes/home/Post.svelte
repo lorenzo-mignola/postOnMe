@@ -1,7 +1,12 @@
 <script lang="ts">
+  import { format } from 'date-fns';
   import type { Post } from '../../lib/client';
 
   export let post: Post;
+
+  const formatDate = (date: Date | string) => format(new Date(date), 'dd.MM.yyyy HH:mm');
+
+  $: date = formatDate(post.createdAt);
 </script>
 
 <article
@@ -9,7 +14,5 @@
 >
   <p class="text-sm text-gray-500" data-testid="author">@{post.author.name}</p>
   <p class="text-2xl" data-testid="text">{post.text}</p>
-  <time class="text-md text-gray-600" data-testid="date"
-    >{new Date(post.createdAt).toLocaleString()}</time
-  >
+  <time class="text-md text-gray-600" data-testid="date">{date}</time>
 </article>
