@@ -2,5 +2,9 @@
   "conventionalCommits.scopes": [
     "server",
     "client"
+  ],
+  "eslint.workingDirectories": [
+    "apps/client",
+    "apps/server"
   ]
 }

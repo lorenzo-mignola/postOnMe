@@ -1,11 +1,22 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "dist",
+    "target": "ESNext",
     "strict": true,
     "lib": [
       "esnext"
     ],
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    ".**/node_modules/**/*",
+    ".turbo",
+    "**/__test__/**/*"
+  ]
 }
