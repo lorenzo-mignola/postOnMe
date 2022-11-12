@@ -2,10 +2,11 @@ import { z } from "zod";
 import prismaClient from "../../prismaClient";
 import { procedure } from "../../servers/trpcServer";
 
-const joinIn = procedure.input(z.string()).query(({ input: userName }) =>
-  prismaClient.user.create({
+const joinIn = procedure.input(z.string()).mutation(async ({ input: userName }) => {
+  const user = await prismaClient.user.create({
     data: { name: userName },
-  })
-);
+  });
+  return user.id;
+});
 
 export default joinIn;

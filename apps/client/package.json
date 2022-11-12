@@ -34,6 +34,7 @@
     "@trpc/client": "^10.0.0-proxy-beta.26",
     "@trpc/server": "^10.0.0-proxy-beta.26",
     "date-fns": "^2.29.3",
+    "svelte-cookie": "^1.0.1",
     "svelte-spa-router": "^3.3.0"
   }
 }

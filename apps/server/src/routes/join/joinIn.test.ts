@@ -18,5 +18,4 @@ test("should insert a new user", async () => {
   });
 
   expect(user).not.toBeNull();
-  // expect(spyPrisma).toBeCalled();
 });
