@@ -1,14 +1,11 @@
 <script>
-  import { onMount } from 'svelte';
   import { getCookie } from 'svelte-cookie';
   import { link } from 'svelte-spa-router';
   import User from '../assets/User.svelte';
 
-  let hasIdInCookie = false;
+  const userId = Number(getCookie('user-id'));
 
-  onMount(() => {
-    hasIdInCookie = Boolean(getCookie('user-id'));
-  });
+  $: hasIdInCookie = Boolean(userId);
 </script>
 
 <nav class="flex p-4 bg-gray-700 justify-between text-gray-50">
@@ -20,9 +17,9 @@
   <div class="flex items-center gap-1">
     <User />
     {#if hasIdInCookie}
-      <a href="/join" use:link>Join In</a>
-    {:else}
       <p>Hi!</p>
+    {:else}
+      <a href="/join" use:link>Join In</a>
     {/if}
   </div>
 </nav>

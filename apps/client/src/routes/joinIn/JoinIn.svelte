@@ -4,12 +4,28 @@
   import client from '../../lib/client';
 
   let user = '';
+  let showError = false;
+
   async function join() {
-    const id = await client.joinIn.mutate(user);
-    setCookie('user-id', id, 30, false);
-    push('/');
+    try {
+      const id = await client.joinIn.mutate(user);
+      setCookie('user-id', id, 30, false);
+      push('/');
+      showError = false;
+    } catch {
+      showError = true;
+    }
   }
 </script>
+
+{#if showError}
+  <div
+    class="my-4 mx-16 bg-red-100 rounded-lg py-5 px-6 text-base text-red-700 mb-3"
+    role="alert"
+  >
+    User name already used!
+  </div>
+{/if}
 
 <div class="flex justify-center">
   <div class="m-7 w-full md:w-1/2">
