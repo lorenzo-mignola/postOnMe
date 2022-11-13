@@ -12,7 +12,7 @@
       setCookie('user-id', id, 30, false);
       push('/');
       showError = false;
-    } catch {
+    } catch (e) {
       showError = true;
     }
   }
