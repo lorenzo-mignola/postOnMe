@@ -26,6 +26,22 @@ describe('JoinIn flow', () => {
     expect(vi.mocked(client.joinIn.mutate)).toBeCalled();
   });
 
+  test('should not show error message', async () => {
+    vi.mock('../../lib/client', () => ({
+      default: {
+        joinIn: {
+          mutate: vi.fn().mockReturnValue(111111)
+        }
+      }
+    }));
+    render(JoinIn);
+
+    const joinInButton = screen.getByRole('button');
+    fireEvent.click(joinInButton);
+    const errorMessage = screen.queryByText('User name already used!');
+    expect(errorMessage).toBeNull();
+  });
+
   test('should show error message', async () => {
     vi.mock('../../lib/client', () => ({
       default: {
