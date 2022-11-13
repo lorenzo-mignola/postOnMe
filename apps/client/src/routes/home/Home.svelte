@@ -1,9 +1,15 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { getCookie } from 'svelte-cookie';
+  import AddButton from '../../lib/AddButton.svelte';
   import client, { type Post as PostType } from '../../lib/client';
   import Post from './Post.svelte';
 
   let posts: PostType[] = [];
+
+  const userId = Number(getCookie('user-id'));
+
+  $: hasIdInCookie = Boolean(userId);
 
   onMount(async () => {
     try {
@@ -17,3 +23,7 @@
 {#each posts as post}
   <Post {post} />
 {/each}
+
+{#if hasIdInCookie}
+  <AddButton />
+{/if}
