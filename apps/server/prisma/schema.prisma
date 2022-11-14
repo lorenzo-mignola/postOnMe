@@ -20,7 +20,7 @@ model User {
 model Post {
   id        Int       @id @default(autoincrement())
   text      String
-  createdAt DateTime
+  createdAt DateTime  @default(now())
   author    User      @relation(fields: [userId], references: [id])
   userId    Int
   Comment   Comment[]
