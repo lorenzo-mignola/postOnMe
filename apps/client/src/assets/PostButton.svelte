@@ -1,7 +1,15 @@
 <script lang="ts">
+  import { getCookie } from 'svelte-cookie';
+  import client from '../lib/client';
   import { postText } from '../store/postText';
 
   $: disabled = $postText.length === 0;
+
+  const userId = Number(getCookie('user-id'));
+
+  const post = async () => {
+    await client.addPost.mutate({ text: $postText, userId });
+  };
 </script>
 
 <button
@@ -26,5 +34,6 @@
       ml-1
       disabled:bg-gray-900
       disabled:text-slate-300
-      ">Post</button
+      "
+  on:click={post}>Post</button
 >

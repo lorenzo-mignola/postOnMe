@@ -8,7 +8,7 @@ beforeEach(() => {
 });
 
 describe('JoinIn flow', () => {
-  test.skip('should join in the user', () => {
+  test('should join in the user', () => {
     vi.mock('../../lib/client', () => ({
       default: {
         joinIn: {

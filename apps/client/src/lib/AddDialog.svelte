@@ -10,6 +10,7 @@
 <div
   class="modal fade fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto text-white pt-20 px-6 bg-gray-800 bg-opacity-70"
   class:hidden={!open}
+  data-testid="add-dialog"
 >
   <div class="modal-dialog relative w-auto pointer-events-none">
     <div
