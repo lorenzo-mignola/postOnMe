@@ -8,11 +8,11 @@ beforeEach(() => {
 });
 
 describe('JoinIn flow', () => {
-  test('should join in the user', () => {
+  test('should join in the user', async () => {
     vi.mock('../../lib/client', () => ({
       default: {
         joinIn: {
-          mutate: vi.fn().mockReturnValue(111111)
+          mutate: vi.fn().mockResolvedValue(111111)
         }
       }
     }));
@@ -24,13 +24,16 @@ describe('JoinIn flow', () => {
     fireEvent.click(joinInButton);
 
     expect(vi.mocked(client.joinIn.mutate)).toBeCalled();
+    await waitFor(() => {
+      expect(document.cookie).toContain('user-id');
+    });
   });
 
   test('should not show error message', async () => {
     vi.mock('../../lib/client', () => ({
       default: {
         joinIn: {
-          mutate: vi.fn().mockReturnValue(111111)
+          mutate: vi.fn().mockResolvedValue(111111)
         }
       }
     }));
