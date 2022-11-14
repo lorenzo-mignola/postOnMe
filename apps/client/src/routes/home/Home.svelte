@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { getCookie } from 'svelte-cookie';
-  import AddButton from '../../lib/AddButton.svelte';
   import client, { type Post as PostType } from '../../lib/client';
+  import AddButton from './AddButton.svelte';
   import Post from './Post.svelte';
 
   let posts: PostType[] = [];

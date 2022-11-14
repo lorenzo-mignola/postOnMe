@@ -1,6 +1,6 @@
 <script lang="ts">
-  import AddIcon from '../assets/AddIcon.svelte';
-  import AddDialog from './AddDialog.svelte';
+  import AddIcon from '../../assets/AddIcon.svelte';
+  import AddDialog from '../../lib/AddDialog.svelte';
 
   let showDialog = false;
 
