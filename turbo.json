@@ -13,6 +13,9 @@
       "outputs": []
     },
     "test": {
+      "dependsOn": [
+        "^lint"
+      ],
       "cache": true
     },
     "dev": {

@@ -1,9 +1,9 @@
 <script lang="ts">
-  export let clickAction: () => void;
+export let clickAction: () => void;
 </script>
 
 <button
-  on:click={() => clickAction()}
+  on:click="{() => clickAction()}"
   type="button"
   class="px-6
       py-2.5
@@ -21,5 +21,4 @@
       transition
       duration-150
       ease-in-out
-      ml-1">Cancel</button
->
+      ml-1">Cancel</button>

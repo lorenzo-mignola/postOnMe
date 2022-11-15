@@ -1,26 +1,24 @@
 <script lang="ts">
-  import { format } from 'date-fns';
-  import LikeIcon from '../../assets/LikeIcon.svelte';
-  import type { Post } from '../../lib/client';
-  import client from '../../lib/client';
+import { format } from "date-fns";
+import LikeIcon from "../../assets/LikeIcon.svelte";
+import type { Post } from "../../lib/client";
+import client from "../../lib/client";
 
-  export let post: Post;
-  export let refresh: () => Promise<void>;
+export let post: Post;
+export let refresh: () => Promise<void>;
 
-  $: date = formatDate(post.createdAt);
+const formatDate = (dateRaw: Date | string) => format(new Date(dateRaw), "dd.MM.yyyy HH:mm");
 
-  const formatDate = (date: Date | string) =>
-    format(new Date(date), 'dd.MM.yyyy HH:mm');
+$: date = formatDate(post.createdAt);
 
-  const addLike = async () => {
-    await client.addLike.mutate(post.id);
-    await refresh();
-  };
+const addLike = async () => {
+  await client.addLike.mutate(post.id);
+  await refresh();
+};
 </script>
 
 <article
-  class="m-5 p-3 rounded-lg border-2 border-cyan-400 hover:border-cyan-600 bg-gray-800 shadow-sm shadow-gray-400 text-white flex items-center justify-between"
->
+  class="m-5 p-3 rounded-lg border-2 border-cyan-400 hover:border-cyan-600 bg-gray-800 shadow-sm shadow-gray-400 text-white flex items-center justify-between">
   <div>
     <p class="text-sm text-gray-300" data-testid="author">
       @{post.author.name}
@@ -30,7 +28,7 @@
   </div>
   <div>
     <span class="text-lg text-gray-700 flex items-center">
-      <button data-testid="like-button" on:click={addLike}>
+      <button data-testid="like-button" on:click="{addLike}">
         <LikeIcon />
       </button>
       <p data-testid="like">{post.like}</p>

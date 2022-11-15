@@ -5,10 +5,11 @@ import createContext from "../context";
 
 const trpcHandler = createHTTPHandler({
   router: appRouter,
-  createContext: createContext,
+  createContext,
 });
 
-export const server = http.createServer((req, res) => {
+// eslint-disable-next-line consistent-return
+const server = http.createServer((req, res) => {
   // enable CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Request-Method", "*");
@@ -24,3 +25,5 @@ export const server = http.createServer((req, res) => {
   // then we can pass the req/res to the tRPC handler
   trpcHandler(req, res);
 });
+
+export default server;

@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { getCookie } from 'svelte-cookie';
-  import client from '../lib/client';
-  import { postText } from '../store/postText';
+import { getCookie } from "svelte-cookie";
+import client from "../lib/client";
+import postText from "../store/postText";
 
-  export let closeAction: () => void;
+export let closeAction: () => void;
 
-  $: disabled = $postText.length === 0;
+$: disabled = $postText.length === 0;
 
-  const userId = Number(getCookie('user-id'));
+const userId = Number(getCookie("user-id"));
 
-  const post = async () => {
-    await client.addPost.mutate({ text: $postText, userId });
-    closeAction();
-  };
+const post = async () => {
+  await client.addPost.mutate({ text: $postText, userId });
+  closeAction();
+};
 </script>
 
 <button
   type="button"
-  {disabled}
+  disabled="{disabled}"
   class="px-6
       py-2.5
       bg-cyan-600
@@ -38,5 +38,4 @@
       disabled:bg-gray-900
       disabled:text-slate-300
       "
-  on:click={post}>Post</button
->
+  on:click="{post}">Post</button>

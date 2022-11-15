@@ -1,13 +1,13 @@
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { createContext } from "vm";
 import appRouter, { AppRouter } from "./appRouter";
-import { server } from "./servers/httpServer";
+import server from "./servers/httpServer";
 import wss from "./servers/wsServer";
 
 applyWSSHandler<AppRouter>({
   wss,
   router: appRouter,
-  createContext: createContext,
+  createContext,
 });
 
 const port = Number(process.env.PORT) || 5000;

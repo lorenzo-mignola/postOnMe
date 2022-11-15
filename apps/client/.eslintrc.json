@@ -1,0 +1,83 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:svelte/recommended",
+    "plugin:svelte/prettier",
+    "plugin:vitest-globals/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "vitest",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "extraFileExtensions": [
+      ".svelte"
+    ]
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error"
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "svelte": "off"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.svelte"
+      ],
+      "parser": "svelte-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser"
+      },
+      "rules": {
+        "import/no-mutable-exports": "off",
+        "import/prefer-default-export": "off"
+      }
+    },
+    {
+      "files": [
+        "*.test.ts"
+      ],
+      "env": {
+        "vitest-globals/env": true
+      }
+    }
+  ],
+  "settings": {
+    "svelte": {
+      "ignoreWarnings": [
+        "@typescript-eslint/no-unsafe-assignment",
+        "@typescript-eslint/no-unsafe-member-access"
+      ],
+      "compileOptions": {
+        "postcss": {
+          "configFilePath": "./postcss.config.js"
+        }
+      }
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".ts",
+          ".svelte"
+        ]
+      }
+    }
+  }
+}

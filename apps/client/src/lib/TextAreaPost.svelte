@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { postText } from '../store/postText';
+import postText from "../store/postText";
 </script>
 
 <textarea
@@ -20,7 +20,6 @@
         m-0
         focus:text-gray-100 focus:bg-gray-700 focus:border-cyan-600 focus:outline-none
       "
-  bind:value={$postText}
+  bind:value="{$postText}"
   rows="3"
-  placeholder="Post something"
-/>
+  placeholder="Post something"></textarea>

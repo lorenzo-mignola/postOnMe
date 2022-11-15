@@ -1,33 +1,33 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { getCookie } from 'svelte-cookie';
-  import client, { type Post as PostType } from '../../lib/client';
-  import AddButton from './AddButton.svelte';
-  import Post from './Post.svelte';
+import { onMount } from "svelte";
+import { getCookie } from "svelte-cookie";
+import client, { type Post as PostType } from "../../lib/client";
+import AddButton from "./AddButton.svelte";
+import Post from "./Post.svelte";
 
-  let posts: PostType[] = [];
+let posts: PostType[] = [];
 
-  const userId = Number(getCookie('user-id'));
+const userId = Number(getCookie("user-id"));
 
-  $: hasIdInCookie = Boolean(userId);
+$: hasIdInCookie = Boolean(userId);
 
-  const fetchPost = async () => {
-    try {
-      posts = await client.posts.query();
-    } catch (e) {
-      console.error(e);
-    }
-  };
+const fetchPost = async () => {
+  try {
+    posts = await client.posts.query();
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-  onMount(() => {
-    fetchPost();
-  });
+onMount(() => {
+  fetchPost();
+});
 </script>
 
 {#each posts as post}
-  <Post {post} refresh={fetchPost} />
+  <Post post="{post}" refresh="{fetchPost}" />
 {/each}
 
 {#if hasIdInCookie}
-  <AddButton refresh={fetchPost} />
+  <AddButton refresh="{fetchPost}" />
 {/if}

@@ -1,11 +1,11 @@
 <script>
-  import { getCookie } from 'svelte-cookie';
-  import { link } from 'svelte-spa-router';
-  import User from '../assets/User.svelte';
+import { getCookie } from "svelte-cookie";
+import { link } from "svelte-spa-router";
+import User from "../assets/User.svelte";
 
-  const userId = Number(getCookie('user-id'));
+const userId = Number(getCookie("user-id"));
 
-  $: hasIdInCookie = Boolean(userId);
+$: hasIdInCookie = Boolean(userId);
 </script>
 
 <nav class="flex p-4 bg-gray-700 justify-between text-gray-50">
