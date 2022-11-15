@@ -7,7 +7,7 @@ const post: PostType = {
   text: 'prova 1',
   createdAt: new Date('2022-11-04T10:37:25.152Z'),
   userId: 1,
-  like: 0,
+  like: 3,
   author: {
     id: 1,
     name: 'lorenzo'
@@ -23,9 +23,11 @@ describe('Post.svelte', () => {
     const author = screen.getByTestId('author');
     const text = screen.getByTestId('text');
     const date = screen.getByTestId('date');
+    const like = screen.getByTestId('like');
 
     expect(author.innerHTML).toBe(`@${post.author.name}`);
     expect(text.innerHTML).toBe(post.text);
     expect(date.innerHTML).toBe('04.11.2022 11:37');
+    expect(like.innerHTML).toBe('3');
   });
 });
