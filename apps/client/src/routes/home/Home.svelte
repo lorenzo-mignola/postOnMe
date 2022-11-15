@@ -11,12 +11,16 @@
 
   $: hasIdInCookie = Boolean(userId);
 
-  onMount(async () => {
+  const fetchPost = async () => {
     try {
       posts = await client.posts.query();
     } catch (e) {
       console.error(e);
     }
+  };
+
+  onMount(() => {
+    fetchPost();
   });
 </script>
 
@@ -25,5 +29,5 @@
 {/each}
 
 {#if hasIdInCookie}
-  <AddButton />
+  <AddButton refresh={fetchPost} />
 {/if}

@@ -2,14 +2,21 @@
   import AddIcon from '../../assets/AddIcon.svelte';
   import AddDialog from '../../lib/AddDialog.svelte';
 
+  export let refresh: () => Promise<void>;
+
   let showDialog = false;
 
   function openDialog() {
     showDialog = true;
   }
 
-  function closeDialog() {
-    showDialog = false;
+  async function closeDialog() {
+    try {
+      showDialog = false;
+      await refresh();
+    } catch (error) {
+      console.error(error);
+    }
   }
 </script>
 

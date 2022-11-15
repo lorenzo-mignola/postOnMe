@@ -14,8 +14,9 @@ describe('Write post flow', () => {
     });
     vi.resetAllMocks();
   });
+
   test('should write a post and be able to click the post button', () => {
-    render(AddButton);
+    render(AddButton, { refresh: vi.fn() });
 
     const addButton = screen.getByTestId('add-button');
     fireEvent.click(addButton);
@@ -26,7 +27,7 @@ describe('Write post flow', () => {
   });
 
   test('should close the dialog', async () => {
-    render(AddButton);
+    render(AddButton, { refresh: vi.fn() });
 
     const addButton = screen.getByTestId('add-button');
     fireEvent.click(addButton);
@@ -53,7 +54,7 @@ describe('Write post flow', () => {
       }
     }));
 
-    render(AddButton);
+    render(AddButton, { refresh: vi.fn() });
 
     const addButton = screen.getByTestId('add-button');
     fireEvent.click(addButton);

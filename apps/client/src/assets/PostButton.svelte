@@ -3,12 +3,15 @@
   import client from '../lib/client';
   import { postText } from '../store/postText';
 
+  export let closeAction: () => void;
+
   $: disabled = $postText.length === 0;
 
   const userId = Number(getCookie('user-id'));
 
   const post = async () => {
     await client.addPost.mutate({ text: $postText, userId });
+    closeAction();
   };
 </script>
 

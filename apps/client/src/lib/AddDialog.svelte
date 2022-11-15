@@ -30,7 +30,7 @@
         class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md"
       >
         <CloseButton clickAction={closeDialog} />
-        <PostButton />
+        <PostButton closeAction={closeDialog} />
       </div>
     </div>
   </div>
