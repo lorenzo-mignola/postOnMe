@@ -1,5 +1,7 @@
-import { cleanup, render, screen } from '@testing-library/svelte';
+import { cleanup, fireEvent, render, screen } from '@testing-library/svelte';
+import { vi } from 'vitest';
 import type { Post as PostType } from '../../lib/client';
+import client from '../../lib/client';
 import Post from './Post.svelte';
 
 const post: PostType = {
@@ -17,7 +19,7 @@ const post: PostType = {
 describe('Post.svelte', () => {
   afterEach(() => cleanup());
 
-  it('render the post component', () => {
+  test('render the post component', () => {
     render(Post, { post });
 
     const author = screen.getByTestId('author');
@@ -29,5 +31,25 @@ describe('Post.svelte', () => {
     expect(text.innerHTML).toBe(post.text);
     expect(date.innerHTML).toBe('04.11.2022 11:37');
     expect(like.innerHTML).toBe('3');
+  });
+
+  test('add like', () => {
+    vi.mock('../../lib/client', () => ({
+      default: {
+        addLike: {
+          mutate: vi.fn()
+        },
+        posts: {
+          query: vi.fn()
+        }
+      }
+    }));
+
+    render(Post, { post, refresh: () => vi.fn() });
+
+    const likeButton = screen.getByTestId('like-button');
+    fireEvent.click(likeButton);
+
+    expect(vi.mocked(client.addLike.mutate)).toBeCalledWith(3);
   });
 });

@@ -2,13 +2,20 @@
   import { format } from 'date-fns';
   import LikeIcon from '../../assets/LikeIcon.svelte';
   import type { Post } from '../../lib/client';
+  import client from '../../lib/client';
 
   export let post: Post;
+  export let refresh: () => Promise<void>;
+
+  $: date = formatDate(post.createdAt);
 
   const formatDate = (date: Date | string) =>
     format(new Date(date), 'dd.MM.yyyy HH:mm');
 
-  $: date = formatDate(post.createdAt);
+  const addLike = async () => {
+    await client.addLike.mutate(post.id);
+    await refresh();
+  };
 </script>
 
 <article
@@ -23,7 +30,9 @@
   </div>
   <div>
     <span class="text-lg text-gray-700 flex items-center">
-      <LikeIcon />
+      <button data-testid="like-button" on:click={addLike}>
+        <LikeIcon />
+      </button>
       <p data-testid="like">{post.like}</p>
     </span>
   </div>

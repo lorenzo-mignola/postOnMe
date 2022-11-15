@@ -25,7 +25,7 @@
 </script>
 
 {#each posts as post}
-  <Post {post} />
+  <Post {post} refresh={fetchPost} />
 {/each}
 
 {#if hasIdInCookie}
