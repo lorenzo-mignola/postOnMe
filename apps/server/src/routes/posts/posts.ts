@@ -1,6 +1,7 @@
 import { z } from "zod";
 import prismaClient from "../../prismaClient";
 import { procedure } from "../../servers/trpcServer";
+import includePost from "./utils/includePost";
 
 const posts = procedure
   .input(
@@ -20,10 +21,7 @@ const posts = procedure
           createdAt: "desc",
         },
       ],
-      include: {
-        author: true,
-        comment: true,
-      },
+      include: includePost,
       take: 20,
       skip,
     });
