@@ -13,10 +13,21 @@ describe("Write post flow", () => {
       value: "user-id=111111",
     });
     vi.resetAllMocks();
+
+    vi.mock("../../lib/client", () => ({
+      default: {
+        posts: {
+          query: vi.fn(),
+        },
+        addPost: {
+          mutate: vi.fn(),
+        },
+      },
+    }));
   });
 
   test("should write a post and be able to click the post button", () => {
-    render(AddButton, { refresh: vi.fn() });
+    render(AddButton);
 
     const addButton = screen.getByTestId("add-button");
     fireEvent.click(addButton);
@@ -27,7 +38,7 @@ describe("Write post flow", () => {
   });
 
   test("should close the dialog", async () => {
-    render(AddButton, { refresh: vi.fn() });
+    render(AddButton);
 
     const addButton = screen.getByTestId("add-button");
     fireEvent.click(addButton);
@@ -46,15 +57,7 @@ describe("Write post flow", () => {
   });
 
   test("should write a post and send post", async () => {
-    vi.mock("../../lib/client", () => ({
-      default: {
-        addPost: {
-          mutate: vi.fn(),
-        },
-      },
-    }));
-
-    render(AddButton, { refresh: vi.fn() });
+    render(AddButton);
 
     const addButton = screen.getByTestId("add-button");
     fireEvent.click(addButton);

@@ -10,7 +10,8 @@
     "test:vitest": "dotenv -e .env.test -- vitest run --no-threads",
     "test:coverage": "dotenv -e .env.test -- vitest run --no-threads --coverage",
     "test": "npm run test:migrate && npm run test:vitest",
-    "start": "dotenv -e .env -- ts-node ./src/main.ts"
+    "start": "dotenv -e .env -- ts-node ./src/main.ts",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",

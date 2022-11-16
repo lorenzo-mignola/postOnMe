@@ -10,7 +10,7 @@
     "dev": "turbo run dev --parallel",
     "test": "turbo run test --parallel",
     "lint": "turbo run lint",
-    "lint-staged": "lint-staged",
+    "lint-staged": "turbo run lint-staged",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install"
   },

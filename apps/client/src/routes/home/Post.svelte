@@ -3,9 +3,9 @@ import { format } from "date-fns";
 import LikeIcon from "../../assets/LikeIcon.svelte";
 import type { Post } from "../../lib/client";
 import client from "../../lib/client";
+import { fetchPost } from "../../store/posts";
 
 export let post: Post;
-export let refresh: () => Promise<void>;
 
 const formatDate = (dateRaw: Date | string) => format(new Date(dateRaw), "dd.MM.yyyy HH:mm");
 
@@ -13,7 +13,7 @@ $: date = formatDate(post.createdAt);
 
 const addLike = async () => {
   await client.addLike.mutate(post.id);
-  await refresh();
+  await fetchPost();
 };
 </script>
 
@@ -27,7 +27,7 @@ const addLike = async () => {
     <time class="text-md text-gray-500" data-testid="date">{date}</time>
   </div>
   <div>
-    <span class="text-lg text-gray-700 flex items-center">
+    <span class="text-lg text-gray-300 flex items-center">
       <button data-testid="like-button" on:click="{addLike}">
         <LikeIcon />
       </button>

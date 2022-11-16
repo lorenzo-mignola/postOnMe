@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/svelte";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/svelte";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import type { Post as PostType } from "../../lib/client";
 import client from "../../lib/client";
@@ -16,14 +16,11 @@ const post: PostType = {
   },
 };
 
-// @ts-expect-error
-const refresh: () => Promise<void> = () => vi.fn<void>();
-
 describe("Post.svelte", () => {
   afterEach(() => cleanup());
 
   test("render the post component", () => {
-    render(Post, { post, refresh });
+    render(Post, { post });
 
     const author = screen.getByTestId("author");
     const text = screen.getByTestId("text");
@@ -48,11 +45,14 @@ describe("Post.svelte", () => {
       },
     }));
 
-    render(Post, { post, refresh });
+    render(Post, { post });
 
     const likeButton = screen.getByTestId("like-button");
     fireEvent.click(likeButton);
 
-    expect(vi.mocked(client.addLike.mutate)).toBeCalledWith(3);
+    waitFor(async () => {
+      expect(vi.mocked(client.addLike.mutate)).toBeCalledWith(3);
+      expect(vi.mocked(client.posts.query)).toBeCalled();
+    });
   });
 });

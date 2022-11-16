@@ -9,8 +9,7 @@
 <script lang="ts">
 import AddIcon from "../../assets/AddIcon.svelte";
 import AddDialog from "../../lib/AddDialog.svelte";
-
-export let refresh: () => Promise<void>;
+import { fetchPost } from "../../store/posts";
 
 let showDialog = false;
 
@@ -21,7 +20,7 @@ function openDialog() {
 async function closeDialog() {
   try {
     showDialog = false;
-    await refresh();
+    await fetchPost();
   } catch (error) {
     console.error(error);
   }
