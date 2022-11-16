@@ -22,6 +22,9 @@ describe("addComment", () => {
     const post = await caller.getPost(postId);
 
     expect(post?._count.comment).toBe(1);
-    expect(post?.comment[0].comment).toBe("new comment");
+    const comment = post?.comment[0];
+    expect(comment).toBeTruthy();
+    expect(comment!.comment).toBe("new comment");
+    expect(comment!.author.id).toBe(userId);
   });
 });
