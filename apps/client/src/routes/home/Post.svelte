@@ -1,15 +1,13 @@
 <script lang="ts">
-import { format } from "date-fns";
 import { push } from "svelte-spa-router";
 import CommentIcon from "../../assets/CommentIcon.svelte";
 import LikeIcon from "../../assets/LikeIcon.svelte";
 import type { Post } from "../../lib/client";
 import client from "../../lib/client";
 import { fetchPost } from "../../store/posts";
+import formatDate from "../../util/formatDate";
 
 export let post: Post;
-
-const formatDate = (dateRaw: Date | string) => format(new Date(dateRaw), "dd.MM.yyyy HH:mm");
 
 $: date = formatDate(post.createdAt);
 
