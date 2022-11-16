@@ -7,9 +7,11 @@
     "lint": "eslint \"./src/**\" --fix",
     "dev": "dotenv -e .env -- nodemon ./src/main.ts",
     "test:migrate": "dotenv -e .env.test -- npx prisma db push --accept-data-loss",
+    "test:migrate:dev": "dotenv -e .env.test -- npx prisma db push --accept-data-loss --skip-generate",
     "test:vitest": "dotenv -e .env.test -- vitest run --no-threads",
     "test:coverage": "dotenv -e .env.test -- vitest run --no-threads --coverage",
     "test": "npm run test:migrate && npm run test:vitest",
+    "test:dev": "npm run test:migrate:dev && dotenv -e .env.test -- vitest --no-threads",
     "start": "dotenv -e .env -- ts-node ./src/main.ts",
     "lint-staged": "lint-staged"
   },
