@@ -5,12 +5,8 @@ const client = createTRPCProxyClient<AppRouter>({
   links: [httpBatchLink({ url: "http://localhost:3030" })],
 });
 
-type OutputPosts = typeof client.posts.query;
-type ArrayElement<ArrayType> = ArrayType extends readonly (infer ElementType)[]
-  ? ElementType
-  : never;
+type OutputPost = Awaited<ReturnType<typeof client.getPost.query>>;
 
-type Posts = Awaited<ReturnType<OutputPosts>>;
-export type Post = ArrayElement<Posts>;
+export type Post = Omit<OutputPost, "comment"> & Partial<Pick<OutputPost, "comment">>;
 
 export default client;

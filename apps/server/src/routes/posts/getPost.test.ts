@@ -25,7 +25,6 @@ describe("getPost", () => {
     expect(post).toHaveProperty("author");
     expect(post).toHaveProperty("comment");
     expect(Array.isArray(post?.comment)).toBe(true);
-    // eslint-disable-next-line no-underscore-dangle
     expect(post?._count).toHaveProperty("comment");
   });
 });

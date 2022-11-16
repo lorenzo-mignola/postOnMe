@@ -1,5 +1,6 @@
 <script lang="ts">
 import { format } from "date-fns";
+import CommentIcon from "../../assets/CommentIcon.svelte";
 import LikeIcon from "../../assets/LikeIcon.svelte";
 import type { Post } from "../../lib/client";
 import client from "../../lib/client";
@@ -27,11 +28,17 @@ const addLike = async () => {
     <time class="text-md text-gray-500" data-testid="date">{date}</time>
   </div>
   <div>
-    <span class="text-lg text-gray-300 flex items-center">
-      <button data-testid="like-button" on:click="{addLike}">
-        <LikeIcon />
-      </button>
-      <p data-testid="like">{post.like}</p>
+    <span class="text-lg text-gray-300">
+      <div class="flex items-center">
+        <button data-testid="like-button" on:click="{addLike}">
+          <LikeIcon />
+        </button>
+        <p data-testid="like">{post.like}</p>
+      </div>
+      <div class="flex items-center">
+        <CommentIcon />
+        <p data-testid="comments">{post._count.comment}</p>
+      </div>
     </span>
   </div>
 </article>

@@ -42,7 +42,8 @@
           "error"
         ]
       }
-    ]
+    ],
+    "no-underscore-dangle": "off"
   },
   "overrides": [
     {

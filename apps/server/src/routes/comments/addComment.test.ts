@@ -21,7 +21,6 @@ describe("addComment", () => {
     await caller.addComment({ postId, comment: "new comment", userId });
     const post = await caller.getPost(postId);
 
-    // eslint-disable-next-line no-underscore-dangle
     expect(post?._count.comment).toBe(1);
     expect(post?.comment[0].comment).toBe("new comment");
   });

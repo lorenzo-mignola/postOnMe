@@ -14,6 +14,9 @@ const post: PostType = {
     id: 1,
     name: "lorenzo",
   },
+  _count: {
+    comment: 2,
+  },
 };
 
 describe("Post.svelte", () => {
@@ -26,11 +29,13 @@ describe("Post.svelte", () => {
     const text = screen.getByTestId("text");
     const date = screen.getByTestId("date");
     const like = screen.getByTestId("like");
+    const comments = screen.getByTestId("comments");
 
     expect(author.innerHTML).toBe(`@${post.author.name}`);
     expect(text.innerHTML).toBe(post.text);
     expect(date.innerHTML).toBe("04.11.2022 11:37");
     expect(like.innerHTML).toBe("3");
+    expect(comments.innerHTML).toBe("2");
   });
 
   test("add like", () => {
