@@ -1,4 +1,5 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/svelte";
+import { push } from "svelte-spa-router";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import type { Post as PostType } from "../../lib/client";
 import client from "../../lib/client";
@@ -59,5 +60,18 @@ describe("Post.svelte", () => {
       expect(vi.mocked(client.addLike.mutate)).toBeCalledWith(3);
       expect(vi.mocked(client.posts.query)).toBeCalled();
     });
+  });
+
+  test("should open the post", async () => {
+    vi.mock("svelte-spa-router", () => ({
+      push: vi.fn(),
+    }));
+
+    render(Post, { post });
+
+    const openButton = screen.getByTestId("open-button");
+    fireEvent.click(openButton);
+
+    expect(vi.mocked(push)).toBeCalledWith(`/post/${post.id}`);
   });
 });
