@@ -32,11 +32,13 @@ describe("PostView", () => {
     const date = screen.getByTestId("date");
     const like = screen.getByTestId("like");
     const comments = screen.getByTestId("comments");
+    const commentElements = screen.queryAllByTestId("comment-element");
 
     expect(author.innerHTML).toBe(`@${post.author.name}`);
     expect(text.innerHTML).toBe(post.text);
     expect(date.innerHTML).toBe("04.11.2022 11:37");
     expect(like.innerHTML).toBe("3");
     expect(comments.innerHTML).toBe("2");
+    expect(commentElements).toHaveLength(2);
   });
 });

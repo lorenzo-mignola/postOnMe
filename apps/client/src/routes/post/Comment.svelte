@@ -5,7 +5,7 @@ import formatDate from "../../util/formatDate";
 export let comment: Post["comment"][number];
 </script>
 
-<div class="mt=1">
+<div class="mt-1" data-testid="comment-element">
   <hr class="border-gray-500" />
   <p class="mt-2">
     {comment.comment}
