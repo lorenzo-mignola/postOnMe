@@ -1,24 +1,9 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/svelte";
 import { push } from "svelte-spa-router";
 import { afterEach, describe, expect, test, vi } from "vitest";
-import type { Post as PostType } from "../../lib/client";
+import post from "../../../__test__/mock/post";
 import client from "../../lib/client";
 import Post from "./Post.svelte";
-
-const post: PostType = {
-  id: 3,
-  text: "prova 1",
-  createdAt: new Date("2022-11-04T10:37:25.152Z"),
-  userId: 1,
-  like: 3,
-  author: {
-    id: 1,
-    name: "lorenzo",
-  },
-  _count: {
-    comment: 2,
-  },
-};
 
 describe("Post.svelte", () => {
   afterEach(() => cleanup());
