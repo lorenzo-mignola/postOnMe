@@ -5,6 +5,7 @@ import LikeIcon from "../../assets/LikeIcon.svelte";
 import type { Post } from "../../lib/client";
 import client from "../../lib/client";
 import formatDate from "../../util/formatDate";
+import Comment from "./Comment.svelte";
 
 export let params: { id?: string } = {};
 
@@ -58,4 +59,11 @@ onMount(async () => {
       <time class="text-gray-300" data-testid="date">{date}</time>
     </div>
   </article>
+
+  <div class="text-white m-5" data-testid="comments-container">
+    <h4 class="text-xl mb-2"><b>Comments</b></h4>
+    {#each post.comment as comment}
+      <Comment comment="{comment}" />
+    {/each}
+  </div>
 {/if}
