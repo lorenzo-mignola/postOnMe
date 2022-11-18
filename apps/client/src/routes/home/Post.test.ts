@@ -1,24 +1,9 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/svelte";
 import { push } from "svelte-spa-router";
 import { afterEach, describe, expect, test, vi } from "vitest";
-import type { Post as PostType } from "../../lib/client";
+import post from "../../../__test__/mock/post";
 import client from "../../lib/client";
 import Post from "./Post.svelte";
-
-const post: PostType = {
-  id: 3,
-  text: "prova 1",
-  createdAt: new Date("2022-11-04T10:37:25.152Z"),
-  userId: 1,
-  like: 3,
-  author: {
-    id: 1,
-    name: "lorenzo",
-  },
-  _count: {
-    comment: 2,
-  },
-};
 
 describe("Post.svelte", () => {
   afterEach(() => cleanup());
@@ -29,7 +14,8 @@ describe("Post.svelte", () => {
     const author = screen.getByTestId("author");
     const text = screen.getByTestId("text");
     const date = screen.getByTestId("date");
-    const like = screen.getByTestId("like");
+    const likeElements = screen.getAllByTestId("like");
+    const like = Array.from(likeElements)[0];
     const comments = screen.getByTestId("comments");
 
     expect(author.innerHTML).toBe(`@${post.author.name}`);
@@ -53,7 +39,8 @@ describe("Post.svelte", () => {
 
     render(Post, { post });
 
-    const likeButton = screen.getByTestId("like-button");
+    const likeButtonElements = screen.getAllByTestId("like-button");
+    const likeButton = Array.from(likeButtonElements)[0];
     fireEvent.click(likeButton);
 
     waitFor(async () => {

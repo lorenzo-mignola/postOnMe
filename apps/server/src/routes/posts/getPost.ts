@@ -11,6 +11,9 @@ const getPost = procedure.input(z.number()).query(async ({ input }) =>
     include: {
       ...includePost,
       comment: {
+        orderBy: {
+          commentedAt: "desc",
+        },
         include: {
           author: true,
         },
