@@ -12,7 +12,7 @@ const getPost = procedure.input(z.number()).query(async ({ input }) =>
       ...includePost,
       comment: {
         orderBy: {
-          commentedAt: "desc",
+          commentedAt: "asc",
         },
         include: {
           author: true,

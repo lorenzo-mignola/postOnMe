@@ -1,15 +1,20 @@
 <script lang="ts">
 import { onMount } from "svelte";
+import { getCookie } from "svelte-cookie";
 import CommentCounter from "../../lib/CommentCounter.svelte";
 import Like from "../../lib/Like.svelte";
 import post, { getPost } from "../../store/post";
 import formatDate from "../../util/formatDate";
 import type { ParamsPost } from "../../util/types/ParamsPost";
 import Comment from "./Comment.svelte";
+import WriteComment from "./WriteComment.svelte";
 
 export let params: ParamsPost = {};
 
+const userId = Number(getCookie("user-id"));
+
 $: date = formatDate($post?.createdAt || new Date());
+$: showWriteComment = Boolean(userId);
 
 const refresh = async () => {
   await getPost(params);
@@ -20,7 +25,7 @@ onMount(async () => {
 });
 </script>
 
-{#if post}
+{#if $post}
   <article class="m-5 p-6 rounded-lg border-2 border-cyan-400 bg-gray-800 text-white">
     <div class="flex justify-between">
       <div>
@@ -44,4 +49,8 @@ onMount(async () => {
       <Comment comment="{comment}" />
     {/each}
   </div>
+
+  {#if showWriteComment}
+    <WriteComment />
+  {/if}
 {/if}

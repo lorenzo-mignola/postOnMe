@@ -7,10 +7,6 @@ import client from "../../lib/client";
 import postStore from "../../store/post";
 import WriteComment from "./WriteComment.svelte";
 
-const params = {
-  id: "222222",
-};
-
 const postMock = { ...post, comment };
 
 describe("WriteComment", () => {
@@ -53,7 +49,7 @@ describe("WriteComment", () => {
         },
       },
     }));
-    render(WriteComment, { params });
+    render(WriteComment);
 
     const sendButton = screen.getByRole<HTMLButtonElement>("button");
     const input = screen.getByRole<HTMLInputElement>("textbox");
@@ -64,8 +60,8 @@ describe("WriteComment", () => {
     await waitFor(() => {
       expect(vi.mocked(client.addComment.mutate)).toBeCalledWith({
         comment: "some comment",
+        postId: postMock.id,
         userId: 111111,
-        postId: 222222,
       });
     });
     expect(vi.mocked(client.getPost.query)).toBeCalled();
@@ -82,7 +78,7 @@ describe("WriteComment", () => {
         },
       },
     }));
-    render(WriteComment, { params });
+    render(WriteComment);
 
     const sendButton = screen.getByRole<HTMLButtonElement>("button");
     const input = screen.getByRole<HTMLInputElement>("textbox");

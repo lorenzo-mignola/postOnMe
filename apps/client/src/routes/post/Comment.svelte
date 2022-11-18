@@ -1,14 +1,8 @@
 <script lang="ts">
-import { getCookie } from "svelte-cookie";
 import type { Post } from "../../lib/client";
 import formatDate from "../../util/formatDate";
-import WriteComment from "./WriteComment.svelte";
 
 export let comment: Post["comment"][number];
-
-const userId = Number(getCookie("user-id"));
-
-$: showWriteComment = Boolean(userId);
 </script>
 
 <div class="mt-1" data-testid="comment-element">
@@ -25,7 +19,3 @@ $: showWriteComment = Boolean(userId);
     </p>
   </span>
 </div>
-
-{#if showWriteComment}
-  <WriteComment />
-{/if}
