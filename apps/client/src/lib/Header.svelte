@@ -1,11 +1,20 @@
-<script>
+<script lang="ts">
+import { onMount } from "svelte";
 import { getCookie } from "svelte-cookie";
-import { link } from "svelte-spa-router";
+import { link, location } from "svelte-spa-router";
 import User from "../assets/User.svelte";
 
-const userId = Number(getCookie("user-id"));
+let userId: number;
+
+const updateUserId = () => {
+  userId = Number(getCookie("user-id"));
+};
+
+location.subscribe(updateUserId);
 
 $: hasIdInCookie = Boolean(userId);
+
+onMount(updateUserId);
 </script>
 
 <nav class="flex p-4 bg-gray-700 justify-between text-gray-50">
