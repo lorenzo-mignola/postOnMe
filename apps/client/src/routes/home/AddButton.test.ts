@@ -1,5 +1,4 @@
-import { fireEvent } from "@testing-library/dom";
-import { render, screen, waitFor } from "@testing-library/svelte";
+import { fireEvent, render, screen, waitFor } from "@testing-library/svelte";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import client from "../../lib/client";
 import postText from "../../store/postText";
