@@ -3,9 +3,17 @@ import { describe, vi } from "vitest";
 import comment from "../../../__test__/mock/comment";
 import post from "../../../__test__/mock/post";
 import client from "../../lib/client";
+import postStore from "../../store/post";
 import PostView from "./PostView.svelte";
 
+const postMock = { ...post, comment };
+
 describe("PostView", () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+    postStore.set(postMock);
+  });
+
   test("render the post component view", async () => {
     vi.mock("../../lib/client", () => ({
       default: {

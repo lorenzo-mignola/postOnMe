@@ -2,8 +2,10 @@
 import { getCookie } from "svelte-cookie";
 import client from "../../lib/client";
 import SendCommentButton from "../../lib/SendCommentButton.svelte";
+import { getPost } from "../../store/post";
+import type { ParamsPost } from "../../util/types/ParamsPost";
 
-export let params: { id?: string } = {};
+export let params: ParamsPost = {};
 
 let newComment = "";
 const userId = Number(getCookie("user-id"));
@@ -14,6 +16,7 @@ $: postId = Number(params.id);
 const onSend = async () => {
   await client.addComment.mutate({ comment: newComment, userId, postId });
   newComment = "";
+  await getPost(params);
 };
 </script>
 
