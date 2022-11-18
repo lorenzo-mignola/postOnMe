@@ -37,7 +37,7 @@ const openPost = () => {
     <div>
       <span class="text-lg text-gray-300">
         <div class="flex items-center">
-          <button data-testid="like-button" on:click="{addLike}">
+          <button data-testid="like-button" on:click|stopPropagation="{addLike}">
             <LikeIcon />
           </button>
           <p data-testid="like">{post.like}</p>
