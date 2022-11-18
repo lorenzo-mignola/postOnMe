@@ -14,7 +14,8 @@ describe("Post.svelte", () => {
     const author = screen.getByTestId("author");
     const text = screen.getByTestId("text");
     const date = screen.getByTestId("date");
-    const like = screen.getByTestId("like");
+    const likeElements = screen.getAllByTestId("like");
+    const like = Array.from(likeElements)[0];
     const comments = screen.getByTestId("comments");
 
     expect(author.innerHTML).toBe(`@${post.author.name}`);
@@ -38,7 +39,8 @@ describe("Post.svelte", () => {
 
     render(Post, { post });
 
-    const likeButton = screen.getByTestId("like-button");
+    const likeButtonElements = screen.getAllByTestId("like-button");
+    const likeButton = Array.from(likeButtonElements)[0];
     fireEvent.click(likeButton);
 
     waitFor(async () => {

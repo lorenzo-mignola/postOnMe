@@ -1,9 +1,8 @@
 <script lang="ts">
 import { push } from "svelte-spa-router";
-import CommentIcon from "../../assets/CommentIcon.svelte";
-import LikeIcon from "../../assets/LikeIcon.svelte";
 import type { Post } from "../../lib/client";
-import client from "../../lib/client";
+import CommentCounter from "../../lib/CommentCounter.svelte";
+import Like from "../../lib/Like.svelte";
 import { fetchPost } from "../../store/posts";
 import formatDate from "../../util/formatDate";
 
@@ -11,8 +10,7 @@ export let post: Post;
 
 $: date = formatDate(post.createdAt);
 
-const addLike = async () => {
-  await client.addLike.mutate(post.id);
+const refresh = async () => {
   await fetchPost();
 };
 
@@ -36,16 +34,8 @@ const openPost = () => {
     </div>
     <div>
       <span class="text-lg text-gray-300">
-        <div class="flex items-center">
-          <button data-testid="like-button" on:click|stopPropagation="{addLike}">
-            <LikeIcon />
-          </button>
-          <p data-testid="like">{post.like}</p>
-        </div>
-        <div class="flex items-center">
-          <CommentIcon />
-          <p data-testid="comments">{post._count.comment}</p>
-        </div>
+        <Like like="{post.like}" id="{post.id}" refresh="{refresh}" />
+        <CommentCounter comment="{post._count.comment}" />
       </span>
     </div>
   </button>

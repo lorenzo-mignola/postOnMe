@@ -1,9 +1,9 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import CommentIcon from "../../assets/CommentIcon.svelte";
-import LikeIcon from "../../assets/LikeIcon.svelte";
 import type { Post } from "../../lib/client";
 import client from "../../lib/client";
+import CommentCounter from "../../lib/CommentCounter.svelte";
+import Like from "../../lib/Like.svelte";
 import formatDate from "../../util/formatDate";
 import Comment from "./Comment.svelte";
 
@@ -24,8 +24,7 @@ const getPost = async () => {
   }
 };
 
-const addLike = async () => {
-  await client.addLike.mutate(post.id);
+const refresh = async () => {
   await getPost();
 };
 
@@ -44,16 +43,8 @@ onMount(async () => {
         </h2>
 
         <div class="flex gap-4 items-center mt-2">
-          <div class="flex items-center">
-            <button data-testid="like-button" on:click="{addLike}">
-              <LikeIcon />
-            </button>
-            <p data-testid="like">{post.like}</p>
-          </div>
-          <div class="flex items-center">
-            <CommentIcon />
-            <p data-testid="comments">{post._count.comment}</p>
-          </div>
+          <Like like="{post.like}" id="{post.id}" refresh="{refresh}" />
+          <CommentCounter comment="{post._count.comment}" />
         </div>
       </div>
       <time class="text-gray-300" data-testid="date">{date}</time>
